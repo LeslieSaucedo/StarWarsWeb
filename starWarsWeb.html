@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>
+      Mi web de star wars
+    </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  </head>
+
+  <body>
+    <h3>Bienvenido a mi web de Star Wars!</h3>
+    <button onclick="FindStarWarsPeople()">Haz click aqui para buscar los personajes</button>
+
+    <div id="results">
+
+    </div>
+
+  </body>
+
+  <script>
+    function FindStarWarsPeople()
+    {
+      debugger;
+      var data = undefined;
+      alert("Haz hecho click en el boton");
+      var request = new XMLHttpRequest();
+      request.open('GET', "https://swapi.dev/api/people", true);
+      request.send();
+
+      request.onreadystatechange = function ()
+      {
+        if (this.readyState == 4 && this.status == 200)
+        {
+          var resultRawData = this.response;
+          data = JSON.parse(resultRawData);
+          // alert("Cantidad de personajes encontrados : " + data.count)
+          var element = document.getElementById("results");
+          var countingHtml = document.createElement('h1');
+          countingHtml.innerHTML = "Cantidad de personajes encontrados: " + data.count;
+          element.appendChild(countingHtml);
+        }
+
+      }
+
+
+
+    }
+
+  </script>
+
+
+
+</html>
